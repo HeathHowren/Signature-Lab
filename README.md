@@ -18,6 +18,8 @@ Signature Lab is written by Heath Howren (Cyborg Elf) of
 [Game Reversal Club](https://gamereversal.club) as a companion tool to
 *The Game Hacker's Handbook*, whose chapter on signature scanning it automates.
 
+![The x64dbg CPU view with an instruction right-clicked and the Signature Lab submenu open: Make signature (Alt+Shift+S), Make shortest signature (Ctrl+Alt+Shift+S), Make signature from selection, Make reference signature (Alt+Shift+R), and Signature Lab...](docs/screenshot-menu.png)
+
 ```
 [Signature Lab] pointerlabtutorial.exe+0x1670 (7FF7C43E1670)  forward  20 bytes, 4 wildcards, unique
   x64dbg       48 89 5C 24 08 57 48 83 EC 20 48 8B 05 ?? ?? ?? ?? 48 8B D9
@@ -61,6 +63,27 @@ Signature Lab is written by Heath Howren (Cyborg Elf) of
   forms, and see every match in the References tab. A mask whose length does
   not match its pattern is reported, not silently ignored.
 - **32-bit and 64-bit.** One zip holds both plugins.
+
+## Screenshots
+
+**Reference signatures.** The forward signature above reads a global, and
+**Make reference signature** on that global signs the three best
+instructions that refer to it. Each comes with the expression that turns a
+match back into the global's address.
+
+![The x64dbg log showing the forward signature for pointerlabtutorial.exe+0x1670, then three reference signatures for pointerlabtutorial.exe+0x2DBF0, each unique and each with its resolve line](docs/screenshot-log.png)
+
+**The dialog.** It has every option in one place: mode, byte budget, output
+form and the seven wildcard classes. It also has a tester, and it can save
+your choices as the defaults for the menu entries and commands.
+
+![The Signature Lab dialog, showing the address, mode and output form, the wildcard class checkboxes, and the generated signature in every form](docs/screenshot-dialog.png)
+
+**The tester.** Paste a pattern and every match is listed in the References
+tab. The last ten bytes of the signature above match six places on their
+own. The prologue in front of them is what makes the full signature unique.
+
+![The x64dbg References tab titled Signature Lab: 48 8B 05 ?? ?? ?? ?? 48 8B D9, listing six matches, each a mov rax from a different global](docs/screenshot-test.png)
 
 ## Download
 
