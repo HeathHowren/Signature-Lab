@@ -15,7 +15,7 @@ are addresses that will move and which are code that will not. It checks the
 result against the whole module, and it tells you why each byte was masked.
 
 Signature Lab is written by Heath Howren
-([Cyborg Elf](https://www.youtube.com/c/cyborgelf)) of
+([Cyborg Elf](https://www.youtube.com/cyborgelf)) of
 [Game Reversal Club](https://gamereversal.club) as a companion tool to
 [*The Game Hacker's Handbook*](https://gamereversal.club/books/game-hackers-handbook/),
 whose chapter on signature scanning it automates.
