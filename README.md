@@ -14,9 +14,11 @@ at a different address. It decodes every instruction, so it knows which bytes
 are addresses that will move and which are code that will not. It checks the
 result against the whole module, and it tells you why each byte was masked.
 
-Signature Lab is written by Heath Howren (Cyborg Elf) of
+Signature Lab is written by Heath Howren
+([Cyborg Elf](https://www.youtube.com/c/cyborgelf)) of
 [Game Reversal Club](https://gamereversal.club) as a companion tool to
-*The Game Hacker's Handbook*, whose chapter on signature scanning it automates.
+[*The Game Hacker's Handbook*](https://gamereversal.club/books/game-hackers-handbook/),
+whose chapter on signature scanning it automates.
 
 ![The x64dbg CPU view with an instruction right-clicked and the Signature Lab submenu open: Make signature (Alt+Shift+S), Make shortest signature (Ctrl+Alt+Shift+S), Make signature from selection, Make reference signature (Alt+Shift+R), and Signature Lab...](docs/screenshot-menu.png)
 
@@ -142,8 +144,8 @@ form, command and setting, and what to do when a signature cannot be made.
 
 ## What will not change within a major version
 
-*The Game Hacker's Handbook* quotes Signature Lab by name, so these are pinned
-for the whole 1.x series:
+[*The Game Hacker's Handbook*](https://gamereversal.club/books/game-hackers-handbook/) quotes
+Signature Lab by name, so these are pinned for the whole 1.x series:
 
 - the menu entry labels and their hotkeys;
 - the command names `sigmake`, `sigxref` and `sigtest`, their arguments, and
