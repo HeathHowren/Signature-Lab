@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+env:
+  DEPS_CACHE_VERSION: v1
+
+jobs:
+  build:
+    name: Build and test (${{ matrix.config }})
+    # Pinned, not windows-latest: the generator below names a specific
+    # Visual Studio, and a runner-image roll forward would remove it.
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [Debug, Release]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Both CMakeLists files pin dependencies: the top-level one Zydis and the
+      # x64dbg SDK, tests/CMakeLists.txt Catch2. Hashing only one would let a
+      # bumped pin restore the stale tree forever.
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: build/_deps
+          key: deps-${{ env.DEPS_CACHE_VERSION }}-${{ matrix.config }}-${{ hashFiles('CMakeLists.txt', 'tests/CMakeLists.txt') }}
+          restore-keys: |
+            deps-${{ env.DEPS_CACHE_VERSION }}-${{ matrix.config }}-
+
+      - name: Configure
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+
+      # Builds the .dp64, the 64-bit tests, and through ExternalProject the
+      # .dp32 and the 32-bit tests.
+      - name: Build
+        run: cmake --build build --config ${{ matrix.config }}
+
+      - name: Test
+        run: ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+
+      - name: Package
+        if: matrix.config == 'Release'
+        run: cpack --config build/CPackConfig.cmake -C Release -B build/package
+
+      - name: Upload artifact
+        if: matrix.config == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: SignatureLab
+          path: build/package/*.zip
+          if-no-files-found: error
+
+  release:
+    name: Attach build to release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: SignatureLab
+          path: dist
+
+      - name: Publish
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          body: |
+            Extract the zip into your x64dbg folder, the one that contains
+            `release`. The plugins land in `release\x64\plugins` and
+            `release\x32\plugins`.
+
+            The plugin binaries are **unsigned**. x64dbg loads them without
+            complaint, but antivirus software may flag a debugger plugin that
+            reads process memory. Build from source if you would rather not
+            take a binary on trust.
+
+            See CHANGELOG.md for what is new and THIRD_PARTY_NOTICES.md for
+            licensing (Signature Lab is MIT).

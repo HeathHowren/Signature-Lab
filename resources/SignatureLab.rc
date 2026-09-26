@@ -1,0 +1,80 @@
+#include <windows.h>
+#include "resource.h"
+#include "Version.h"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+IDI_SIGLAB    ICON   "SignatureLab.ico"
+IDR_MENU_ICON RCDATA "menu-icon.png"
+
+IDD_SIGLAB DIALOGEX 0, 0, 420, 322
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Signature Lab"
+FONT 9, "Segoe UI", 400, 0, 0x1
+BEGIN
+    LTEXT           "Address", IDC_STATIC, 7, 9, 40, 8
+    EDITTEXT        IDC_ADDRESS, 50, 7, 110, 12, ES_AUTOHSCROLL
+    LTEXT           "End", IDC_END_LABEL, 168, 9, 20, 8
+    EDITTEXT        IDC_END, 190, 7, 107, 12, ES_AUTOHSCROLL
+    LTEXT           "Mode", IDC_STATIC, 7, 26, 40, 8
+    COMBOBOX        IDC_MODE, 50, 24, 138, 80, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Max bytes", IDC_STATIC, 214, 26, 40, 8
+    EDITTEXT        IDC_MAXBYTES, 257, 24, 40, 12, ES_NUMBER
+
+    GROUPBOX        "Wildcard", IDC_STATIC, 7, 42, 290, 62
+    AUTOCHECKBOX    "Branch targets (rel32)", IDC_W_REL32, 14, 54, 130, 10
+    AUTOCHECKBOX    "Short branch targets (rel8)", IDC_W_REL8, 14, 66, 130, 10
+    AUTOCHECKBOX    "RIP-relative displacements", IDC_W_RIP, 14, 78, 130, 10
+    AUTOCHECKBOX    "Absolute addresses", IDC_W_ABS, 14, 90, 130, 10
+    AUTOCHECKBOX    "Pointer immediates", IDC_W_PTR, 152, 54, 140, 10
+    AUTOCHECKBOX    "Struct and stack offsets", IDC_W_STRUCT, 152, 66, 140, 10
+    AUTOCHECKBOX    "Large immediates", IDC_W_IMM, 152, 78, 140, 10
+
+    LTEXT           "Copy as", IDC_STATIC, 305, 9, 108, 8
+    COMBOBOX        IDC_FORMAT, 305, 19, 108, 80, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "Generate", IDC_GENERATE, 305, 42, 108, 15
+    PUSHBUTTON      "Copy", IDC_COPY, 305, 60, 108, 14
+    PUSHBUTTON      "Save as defaults", IDC_SAVE, 305, 76, 108, 14
+    PUSHBUTTON      "Reset to defaults", IDC_DEFAULTS, 305, 92, 108, 14
+
+    EDITTEXT        IDC_OUTPUT, 7, 112, 406, 170, ES_MULTILINE | ES_READONLY | ES_AUTOVSCROLL | ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL
+
+    LTEXT           "Test a pattern", IDC_STATIC, 7, 290, 50, 8
+    EDITTEXT        IDC_TEST_PATTERN, 60, 288, 300, 12, ES_AUTOHSCROLL
+    PUSHBUTTON      "Test", IDC_TEST, 365, 287, 48, 14
+
+    LTEXT           "", IDC_FOOTER, 7, 307, 350, 8
+    PUSHBUTTON      "Close", IDCANCEL, 363, 304, 50, 14
+END
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION    SIGLAB_RC_VERSION
+ PRODUCTVERSION SIGLAB_RC_VERSION
+ FILEFLAGSMASK  0x3fL
+#ifdef _DEBUG
+ FILEFLAGS      0x1L
+#else
+ FILEFLAGS      0x0L
+#endif
+ FILEOS         VOS__WINDOWS32
+ FILETYPE       VFT_DLL
+ FILESUBTYPE    VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName",      SIGLAB_COMPANY_NAME
+            VALUE "FileDescription",  "Signature Lab - signature maker for x64dbg"
+            VALUE "FileVersion",      SIGLAB_VERSION_STRING
+            VALUE "InternalName",     "SignatureLab"
+            VALUE "LegalCopyright",   SIGLAB_COPYRIGHT
+            VALUE "ProductName",      SIGLAB_PRODUCT_NAME
+            VALUE "ProductVersion",   SIGLAB_VERSION_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END

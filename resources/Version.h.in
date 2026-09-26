@@ -1,0 +1,20 @@
+#ifndef SIGLAB_VERSION_H
+#define SIGLAB_VERSION_H
+
+/* Generated from resources/Version.h.in by CMake configure_file. Do not edit. */
+
+#define SIGLAB_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define SIGLAB_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define SIGLAB_VERSION_PATCH @PROJECT_VERSION_PATCH@
+
+#define SIGLAB_VERSION_STRING "@PROJECT_VERSION@"
+#define SIGLAB_PRODUCT_NAME   "Signature Lab"
+#define SIGLAB_COMPANY_NAME   "Game Reversal Club"
+#define SIGLAB_COPYRIGHT      "Copyright (c) 2026 Heath Howren. MIT License."
+#define SIGLAB_REPO_URL       "https://github.com/HeathHowren/Signature-Lab"
+#define SIGLAB_HOME_URL       "https://gamereversal.club/tools/signature-lab/"
+
+/* Comma-separated form for the RC VERSIONINFO block. */
+#define SIGLAB_RC_VERSION @PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0
+
+#endif /* SIGLAB_VERSION_H */

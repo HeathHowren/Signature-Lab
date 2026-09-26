@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#0f2235"/>
+  <rect width="64" height="4" fill="#c0392b"/>
+  <!-- Six bytes of a hex dump. The two filled ones are the wildcards. -->
+  <rect x="7" y="17" width="12" height="12" rx="2.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <rect x="23.5" y="15.5" width="15" height="15" rx="3" fill="#e67e22"/>
+  <rect x="43" y="17" width="12" height="12" rx="2.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <rect x="7" y="37" width="12" height="12" rx="2.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <rect x="25" y="37" width="12" height="12" rx="2.5" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <rect x="41.5" y="35.5" width="15" height="15" rx="3" fill="#e67e22"/>
+</svg>
